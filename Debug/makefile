@@ -12,6 +12,7 @@ RM := rm -rf
 -include piece/src/subdir.mk
 -include move/src/subdir.mk
 -include main/src/subdir.mk
+-include interpreter/src/subdir.mk
 -include game/src/subdir.mk
 -include fen/src/subdir.mk
 -include subdir.mk

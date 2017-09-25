@@ -25,6 +25,7 @@ C_DEPS :=
 SUBDIRS := \
 fen/src \
 game/src \
+interpreter/src \
 main/src \
 move/src \
 piece/src \
