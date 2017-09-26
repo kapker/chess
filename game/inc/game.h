@@ -1,9 +1,13 @@
+#ifndef CHESS_GAME_H_
+#define CHESS_GAME_H_
+
 #include "../../position/inc/position.h"
 
 class Game {
 public:
-  Game();
-  void printPos();
+  Position getPosition() {return position;}
 private:
-  Position pos;
+  Position position;
 };
+
+#endif  // CHESS_GAME_H_

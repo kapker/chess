@@ -5,28 +5,50 @@ bool Interpreter::isLegalMove(Move mv, Position pos) {
 }
 
 Move Interpreter::moveFromString(std::string str) {
-  Move mv;
-  if (str.length() == 2) { // pawn move
-  }
+    if (str.length() == 2) { // pawn move
+        file_t file;
+        switch(str[0]) {
+            case 'a': file = a;
+                      break;
+            case 'b': file = b;
+                      break;
+            case 'c': file = c;
+                      break;
+            case 'd': file = d;
+                      break;
+            case 'e': file = e;
+                      break;
+            case 'f': file = f;
+                      break;
+            case 'g': file = g;
+                      break;
+            case 'h': file = h;
+                      break;
+            default:  file = a;
+                      break;
+        }
+        Move mv(pawn, move, Coordinate(str[1]-'0', file), Coordinate(str[1], file));
 
-  return mv;
+    } else {
+        Move mv;
+    }
+    return mv;
 }
 
-bool Interpreter::interpretPiece(char c) {
-switch(c) {
-    case 'p': piece = pawn;
-              break;
-    case 'R': piece = rook;
-              break;
-    case 'N': piece = knight;
-              break;
-    case 'B': piece = bishop;
-              break;
-    case 'Q': piece = queen;
-              break;
-    case 'K': piece = king;
+piece_t Interpreter::interpretPiece(char c) {
+    piece_t piece;
+    switch(c) {
+        case 'R': piece = rook;
                   break;
-    default: return false;
-  }
-  return true;
+        case 'N': piece = knight;
+                  break;
+        case 'B': piece = bishop;
+                  break;
+        case 'Q': piece = queen;
+                  break;
+        case 'K': piece = king;
+                      break;
+        default: piece = pawn;
+     }
+     return piece;
 }

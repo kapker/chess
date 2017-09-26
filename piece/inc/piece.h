@@ -1,8 +1,9 @@
+#ifndef CHESS_PIECE_H_
+#define CHESS_PIECE_H_
+
 #include <string>
 #include <vector>
-#include <tuple>
-
-#define TUP(y, x) std::make_tuple(y, x)
+#include "../../utilities/inc/utilities.h"
 
 enum color_t {
   white,
@@ -11,81 +12,91 @@ enum color_t {
 
 class Piece {
 public:
-  virtual ~Piece() = default;
+    Piece(Coordinate coord_, color_t color_, char symbol_) : coord(coord_), color(color_), symbol(symbol_) {}
+    virtual ~Piece() = default;
+    virtual Coordinate* getMoveSet() = 0;
+    char getSymbol() {return symbol;}
 protected:
-  std::tuple<int, int> coords;
-  color_t color;
-  virtual std::vector<std::tuple<int, int>> getMoveSet() = 0;
+    Coordinate coord;
+    color_t color;
+    char symbol;
 };
 
 class Pawn : public Piece {
 public:
-  std::vector<std::tuple<int, int>> getMoveSet();
+  Pawn(Coordinate coord, color_t color, char symbol) : Piece(coord, color, symbol) {}
+  Coordinate* getMoveSet() {return moveSet;};
 private:
-  std::vector<std::tuple<int, int>> moveSet = {TUP(1, 0),
-                                                 TUP(1, 1),
-                                                 TUP(-1, 1)};
+  Coordinate moveSet[3] = {Coordinate(1, 0),
+                           Coordinate(1, 1),
+                           Coordinate(-1, 1)};
 };
 
 class Rook : public Piece {
 public:
-  std::vector<std::tuple<int, int>> getMoveSet();
+  Rook(Coordinate coord, color_t color, char symbol) : Piece(coord, color, symbol) {}
+  Coordinate* getMoveSet() {return moveSet;};
 private:
-private:
-  std::vector<std::tuple<int, int>> moveSet = {TUP(0, 1),
-                                               TUP(1, 0),
-                                               TUP(0, -1),
-                                               TUP(-1, 0)};
+  Coordinate moveSet[4] = {Coordinate(0, 1),
+                           Coordinate(1, 0),
+                           Coordinate(0, -1),
+                           Coordinate(-1, 0)};
 };
 
 class Bishop : public Piece {
 public:
-  std::vector<std::tuple<int, int>> getMoveSet();
+  Bishop(Coordinate coord, color_t color, char symbol) : Piece(coord, color, symbol) {}
+  Coordinate* getMoveSet() {return moveSet;};
 private:
-  std::vector<std::tuple<int, int>> moveSet = {TUP(1, 1),
-                                               TUP(-1, 1),
-                                               TUP(-1, -1),
-                                               TUP(-1, -1)};
+  Coordinate moveSet[4] = {Coordinate(1, 1),
+                           Coordinate(-1, 1),
+                           Coordinate(-1, -1),
+                           Coordinate(-1, -1)};
 };
 
 class Knight : public Piece {
 public:
-  std::vector<std::tuple<int, int>> getMoveSet();
+  Knight(Coordinate coord, color_t color, char symbol) : Piece(coord, color, symbol) {}
+  Coordinate* getMoveSet() {return moveSet;};
 private:
-  std::vector<std::tuple<int, int>> moveSet = {TUP(2, 1),
-                                               TUP(1, 2),
-                                               TUP(-1, 2),
-                                               TUP(-2, 1),
-                                               TUP(-2, -1),
-                                               TUP(-1, -2),
-                                               TUP(1, -2),
-                                               TUP(2, -1)};
+  Coordinate moveSet[8] = {Coordinate(2, 1),
+                           Coordinate(1, 2),
+                           Coordinate(-1, 2),
+                           Coordinate(-2, 1),
+                           Coordinate(-2, -1),
+                           Coordinate(-1, -2),
+                           Coordinate(1, -2),
+                           Coordinate(2, -1)};
 };
 
 class Queen : public Piece {
 public:
-  std::vector<std::tuple<int, int>> getMoveSet();
+  Queen(Coordinate coord, color_t color, char symbol) : Piece(coord, color, symbol) {}
+  Coordinate* getMoveSet() {return moveSet;};
 private:
-  std::vector<std::tuple<int, int>> moveSet = {TUP(1, 0),
-                                               TUP(1, 1),
-                                               TUP(0, 1),
-                                               TUP(-1, 1),
-                                               TUP(-1, 0),
-                                               TUP(-1, -1),
-                                               TUP(0, -1),
-                                               TUP(1, -1)};
+  Coordinate moveSet[8] = {Coordinate(1, 0),
+                           Coordinate(1, 1),
+                           Coordinate(0, 1),
+                           Coordinate(-1, 1),
+                           Coordinate(-1, 0),
+                           Coordinate(-1, -1),
+                           Coordinate(0, -1),
+                           Coordinate(1, -1)};
 };
 
 class King : public Piece {
 public:
-  std::vector<std::tuple<int, int>> getMoveSet();
+  King(Coordinate coord, color_t color, char symbol) : Piece(coord, color, symbol) {}
+  Coordinate* getMoveSet() {return moveSet;};
 private:
-  std::vector<std::tuple<int, int>> moveSet = {TUP(1, 0),
-                                               TUP(1, 1),
-                                               TUP(0, 1),
-                                               TUP(-1, 1),
-                                               TUP(-1, 0),
-                                               TUP(-1, -1),
-                                               TUP(0, -1),
-                                               TUP(1, -1)};
+  Coordinate moveSet[8] = {Coordinate(1, 0),
+                           Coordinate(1, 1),
+                           Coordinate(0, 1),
+                           Coordinate(-1, 1),
+                           Coordinate(-1, 0),
+                           Coordinate(-1, -1),
+                           Coordinate(0, -1),
+                           Coordinate(1, -1)};
 };
+
+#endif  // CHESS_PIECE_H_

@@ -1,5 +1,9 @@
+#ifndef CHESS_MOVE_H_
+#define CHESS_MOVE_H_
+
 #include <iostream>
 #include <string>
+#include "../../utilities/inc/utilities.h"
 
 enum action_t {
   move,
@@ -15,12 +19,8 @@ enum piece_t {
   king
 };
 
-enum color_t {
-  white,
-  black
-};
 enum file_t {
-  a,
+  a = 0,
   b,
   c,
   d,
@@ -32,12 +32,15 @@ enum file_t {
 
 class Move {
 public:
-  void setPiece(piece_t p) {piece = p;}
-  void setAction(action_t a) {action = a;}
-  void setColor(color_t c) {color = c;}
+  Move(piece_t piece_, action_t action_, Coordinate location_, Coordinate destination_) :
+      piece(piece_), action(action_), location(location_), destination(destination_) {}
+  piece_t getPiece() {return piece;}
+  action_t getAction() {return action;}
+  Coordinate getDestination() {return destination;}
 private:
   piece_t piece;
   action_t action;
-  color_t color;
-  std::tuple<int, int> loc, des;
+  Coordinate location, destination;
 };
+
+#endif  // CHESS_MOVE_H_
