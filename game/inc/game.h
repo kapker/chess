@@ -5,7 +5,7 @@
 
 class Game {
 public:
-  Position getPosition() {return position;}
+  Position& getPosition() {return position;}
 private:
   Position position;
 };

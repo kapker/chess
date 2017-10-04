@@ -18,7 +18,10 @@ int main() {
   game.getPosition().printPosition();
 
   std::string str;
+  Move move;
+  while (true) {
   std::cin >> str;
-  Move move = Interpreter::moveFromString(str);
+  move = Interpreter::moveFromString(str);
+  }
 	return 0;
 }

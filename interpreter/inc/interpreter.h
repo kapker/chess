@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+//#include <cctype>
 #include "../../move/inc/move.h"
 #include "../../position/inc/position.h"
 

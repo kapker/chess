@@ -5,42 +5,31 @@
 #include <string>
 #include "../../utilities/inc/utilities.h"
 
-enum action_t {
-  move,
-  capture,
-  promotion
-};
-enum piece_t {
-  pawn,
-  rook,
-  knight,
-  bishop,
-  queen,
-  king
-};
-
-enum file_t {
-  a = 0,
-  b,
-  c,
-  d,
-  e,
-  f,
-  g,
-  h
-};
-
 class Move {
 public:
-  Move(piece_t piece_, action_t action_, Coordinate location_, Coordinate destination_) :
-      piece(piece_), action(action_), location(location_), destination(destination_) {}
-  piece_t getPiece() {return piece;}
-  action_t getAction() {return action;}
-  Coordinate getDestination() {return destination;}
+    piece_t getPiece() const {return piece;}
+    piece_t getPromotion() const {return promotion;}
+    action_t getAction() const {return action;}
+    int getRowSpecifier() const {return rowSpecifier;}
+    int getFileSpecifier() const {return fileSpecifier;}
+    Coordinate getLocation() const {return location;}
+    Coordinate getDestination() const {return destination;}
+
+    void setPiece(char p);
+    void setPromotion(char p);
+    void setAction(action_t a) {action = a;}
+    void setRowSpecifier(char s);
+    void setFileSpecifier(char s);
+    void setLocation(char r, char f);
+    void setDestination(char r, char f);
 private:
-  piece_t piece;
-  action_t action;
-  Coordinate location, destination;
+    int rowSpecifier = -1;
+    int fileSpecifier = -1;
+    bool valid = true;
+    piece_t piece = no_piece;
+    piece_t promotion = no_piece;
+    action_t action = no_action;
+    Coordinate location, destination;
 };
 
 #endif  // CHESS_MOVE_H_
